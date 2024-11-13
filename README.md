@@ -20,13 +20,13 @@ helped you, AI tools you've used, and any other resources that are not solely yo
 
 ## Milestone 1: Setup, Planning, Design
 
-❗️**Title**: `The Creatures’ Keep`
+️**Title**: `The Creatures’ Keep`
 
-❗**Purpose**: `My project will be like a dungeon crawler. I want it to be a game where you fight monsters, get treasure, and move to the next level until the character either dies, or the player makes it out with all their gold.`
+**Purpose**: `My project will be like a dungeon crawler. I want it to be a game where you fight monsters, get treasure, and move to the next level until the character either dies, or the player makes it out with all their gold.`
 
-❗️**Source Assignment(s)**: `List which original assignments you will base your project on? Replace this block of text.`
+**Source Assignment(s)**: `T11(The Legends of Tuna: Breath of Catnip),t12(Events and GUIs), T01(Choose Your Own Adventure), HW07(The Game of Nim)`
 
-❗️**CRC Card(s)**:
+**CRC Card(s)**:
   - Create a CRC card for each class that your project will implement.
   - See this link for a sample CRC card and a template to use for your own cards (you will have to make a copy to edit):
     [CRC Card Example](https://docs.google.com/document/d/1JE_3Qmytk_JGztRqkPXWACJwciPH61VCx3idIlBCVFY/edit?usp=sharing)
@@ -34,9 +34,13 @@ helped you, AI tools you've used, and any other resources that are not solely yo
     README. You can do this by saving an image in the repository and linking to it. See the sample CRC card below - 
     and REPLACE it with your own:
   
-![Don't leave me in your README!](image/crc.png "Image of CRC card as an example. Upload your CRC card(s) in place of this one. ")
+![](image/Class_Dungeon.png)
+![](image/Class_Item.png)
+![](image/Class_Monster.png)
+![](image/Class_Player.png)
+![](image/Class_RunGame.png)
 
-❗️**Branches**: This project will **require** effective use of git. 
+**Branches**: This project will **require** effective use of git. 
 
 Each partner should create a branch at the beginning of the project, and stay on this branch (or branches of their 
 branch) as they work. When you need to bring each others branches together, do so by merging each other's branches 

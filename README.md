@@ -20,9 +20,9 @@ helped you, AI tools you've used, and any other resources that are not solely yo
 
 ## Milestone 1: Setup, Planning, Design
 
-❗️**Title**: `What is the title of your project? Be creative! Replace this block of text.`
+❗️**Title**: `The Creatures’ Keep`
 
-❗**Purpose**: `In a single sentence, describe WHAT your project will do. Replace this block of text.`
+❗**Purpose**: `My project will be like a dungeon crawler. I want it to be a game where you fight monsters, get treasure, and move to the next level until the character either dies, or the player makes it out with all their gold.`
 
 ❗️**Source Assignment(s)**: `List which original assignments you will base your project on? Replace this block of text.`
 
@@ -43,7 +43,7 @@ branch) as they work. When you need to bring each others branches together, do s
 into your own, following the process we've discussed in previous assignments: 
 
 ```
-    Branch 1 name: _____________
+    Branch 1 name: fusonk
     Branch 2 name: _____________
 ```
 ---

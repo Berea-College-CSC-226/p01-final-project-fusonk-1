@@ -21,7 +21,28 @@ class Game:
         """
         Handles the basic logic needed to actually run the game
         """
+        pygame.init()
+        self.size = (800,600) #Window size
+        self.screen = pygame.display.set_mode(self.size)
+        self.screen.fill('gray')
 
+    def run(self):
+        """
+        Handles running the game
+        :return:
+        """
+        run = True
+        while run:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                     run = False
+
+            pygame.display.update()
+
+
+
+
+        pygame.quit()
 
 def main():
     """
@@ -29,6 +50,8 @@ def main():
 
     :return: None
     """
+    game = Game()
+    game.run()
 
 if __name__ == "__main__":
     main()

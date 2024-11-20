@@ -60,7 +60,9 @@ Reflect on what you’ve done so far. How’s it going? Are you feeling behind/a
 What has surprised you so far? Describe your general feelings. Be honest with yourself; this section is for you, not me.
 
 ```
-    **Currently, I feel like Im behind. 
+    **Currently, I feel like Im behind. I know my game seems like its going to be pretty big, so im just going to try and slow it down. By that I mean I will focus on
+    one class at a time, and make sure the most important parts of the game are working before I move on. Im honestly suprised by how much goes into a game that at first glance
+    would feel pretty simple, but then you look at everything that goes into that kinda game, and its a lot of code being used to make it happen, even for the more simple things.
 ```
 
 ---

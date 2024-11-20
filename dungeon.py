@@ -16,28 +16,27 @@
 ####################################################################################
 import pygame
 from player import *
-from dungeon import *
+from monster import *
+from item import *
 
-
-class monster:
+class dungeon:
     def __init__(self):
         """
-        Handles the basic logic needed to create monsters
+        Handles the basic logic needed to set up the dungeon
         """
         pass
 
-    def attack_player(self, player):
+    def is_exit(self,player_position):
         """
-        calculates the monsters attack, as well as sees if the monster can attack
-        :param player:
+        Checks if player has reached the end of the dungeon
+        :param player_position:
         :return:
         """
         pass
 
-    def take_damage(self):
+    def next_level(self):
         """
-        calculates the damage the monster takes after its been hit
-        :param:
+        Re-arranges room to next level
         :return:
         """
         pass

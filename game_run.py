@@ -22,11 +22,11 @@ class Game:
         Handles the basic logic needed to actually run the game
         """
         pygame.init()
-        self.size = (800,600) #Window size
+        self.size = (100,100) #Window size
         self.screen = pygame.display.set_mode(self.size)
         self.screen.fill('gray')
 
-    def run(self):
+    def game_loop(self):
         """
         Handles running the game
         :return:
@@ -39,6 +39,18 @@ class Game:
 
             pygame.display.update()
 
+    def game_over(self):
+        """
+        checks if game is over
+        :return:
+        """
+        pass
+
+    def display_stats(self):
+        """
+        displays information on screen such as gold, health, and item
+        :return:
+        """
 
 
 
@@ -51,7 +63,7 @@ def main():
     :return: None
     """
     game = Game()
-    game.run()
+    game.game_loop()
 
 if __name__ == "__main__":
     main()

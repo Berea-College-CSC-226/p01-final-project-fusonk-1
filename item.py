@@ -16,28 +16,19 @@
 ####################################################################################
 import pygame
 from player import *
-from dungeon import *
 
-
-class monster:
+class item:
     def __init__(self):
         """
-        Handles the basic logic needed to create monsters
+        Handles the basic logic needed use objects
         """
         pass
 
-    def attack_player(self, player):
+    def apply_effect(self, player):
         """
-        calculates the monsters attack, as well as sees if the monster can attack
+        gives a player an effect or pop up based on item
         :param player:
         :return:
         """
         pass
 
-    def take_damage(self):
-        """
-        calculates the damage the monster takes after its been hit
-        :param:
-        :return:
-        """
-        pass

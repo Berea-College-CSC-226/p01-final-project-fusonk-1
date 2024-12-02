@@ -30,7 +30,10 @@ class Item:
         self.rect = self.surf.get_rect()
         self.rect.move_ip(self.screen_size[0] // 2, self.screen_size[1] // 2)
         self.size = 5
-        self.surf = pygame.transform.scale(self.surf, (width, height))  # changes height and width
+        self.surf = pygame.transform.scale(self.surf, (width, height))
+        self.rect.x = screen_size[0] - width  # Right of screen, changes spawn point
+        self.rect.y = 0  # Top of screen, changes spawn point
+        # changes height and width
 
     def apply_effect(self, player):
         """

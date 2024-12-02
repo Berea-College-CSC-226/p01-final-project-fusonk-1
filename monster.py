@@ -36,12 +36,20 @@ class Monster:
         self.rect.x = screen_size[0] - width  # Right of screen, changes spawn point
         self.rect.y = 0  # Top of screen, changes spawn point
 
+    # def direction(self):
+    #     """
+    #     Choose a direction for movement purposes
+    #     :return:
+    #     """
+    #     if direction
     def movement(self):
         """
         Moves the characters in a pattern
         :return:
         """
-        pass
+
+        self.rect.move_ip(0, -3)
+        self.rect.move_ip(0, 3)
 
     def attack_player(self, player):
         """

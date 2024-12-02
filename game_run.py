@@ -49,6 +49,7 @@ class Game:
         # self.player.movement(pygame.key.get_pressed())
             keys = pygame.key.get_pressed()  # Get currently pressed keys
             self.player.movement(keys)  # Update player position based on keys
+
             self.screen.blit(self.player.surf, self.player.rect)  #spawn player
             self.screen.blit(self.monster.surf, self.monster.rect) #spawns monster
             self.screen.blit(self.chest.surf, self.chest.rect)  # spawns chest
@@ -79,7 +80,7 @@ def main():
     :return: None
     """
     game = Game()
-    pygame.display.update()
+    # pygame.display.update()
     game.game_loop()
 
 

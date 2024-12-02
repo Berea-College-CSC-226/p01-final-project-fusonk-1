@@ -15,6 +15,7 @@
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
 ####################################################################################
 import pygame
+import time
 # from dungeon import *
 # from item import *
 
@@ -31,10 +32,13 @@ class Player(pygame.sprite.Sprite):
         print("Spawning player")
         self.surf = pygame.image.load('image/player.png').convert_alpha()
         self.surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
+        self.surf = pygame.transform.scale(self.surf, (width, height))  # changes height
         self.rect = self.surf.get_rect()
         self.rect.move_ip(self.screen_size[0]//2, self.screen_size[1]//2)
-        self.size = 5
-        self.surf = pygame.transform.scale(self.surf, (width, height)) #changes height and width of monster
+        self.move_distance = 0
+        self.position = [0,0]
+        # self.size = 5
+        # self.surf = pygame.transform.scale(self.surf, (width, height)) #changes height and width of monster
 
 
     def movement(self, keys):
@@ -45,17 +49,32 @@ class Player(pygame.sprite.Sprite):
 
         :return: None
         """
-        if keys[pygame.K_UP]:
-            self.rect.move_ip(0, -3)
-        elif keys[pygame.K_DOWN]:
-            self.rect.move_ip(0, 3)
-        if keys[pygame.K_RIGHT]:
-            self.rect.move_ip(3, 0)
-        elif keys[pygame.K_LEFT]:
-            self.rect.move_ip(-3, 0)
+        #Trying to prevent the sprite from moving if it touches a wall
+        # if self.rect.move_ip(self.move_distance, 0):
+        #     # self.rect.move_ip(0,0)
+        #     self.rect.move_ip(-self.move_distance, 0)
+        #     self.position[0] += self.move_distance
 
-        self.rect.x = max(0, min(self.rect.x, self.screen_size[0] - self.rect.width))  #keeps player in boundary
-        self.rect.y = max(0, min(self.rect.y, self.screen_size[1] - self.rect.height))
+
+        if keys[pygame.K_UP]:
+            self.rect.move_ip(0, -1)
+        elif keys[pygame.K_DOWN]:
+            self.rect.move_ip(0, 1)
+        if keys[pygame.K_RIGHT]:
+            self.rect.move_ip(1, 0)
+        elif keys[pygame.K_LEFT]:
+            self.rect.move_ip(-1, 0)
+
+        # self.rect.move_ip(self.move_distance, 0)  # Checks if we hit a wall
+        # if self.rect.right >= self.screen_size[0]:
+        #     self.direction = "left"  # Switches direction left when we hit a wall
+        #     self.rect.move_ip(0, self.move_distance)  # Moves down
+        #
+        #   elif self.direction == "left":
+        #       self.rect.move_ip(-self.move_distance, 0)  # Checks if we hit wall
+        #      if self.rect.left <= 0:
+        #         self.direction = "right"  # Switch direction to right
+        #       self.rect.move_ip(0, self.move_distance)  # move down
 
     def take_damage(self):
         """

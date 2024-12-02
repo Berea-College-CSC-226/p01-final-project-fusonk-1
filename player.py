@@ -20,7 +20,7 @@ import pygame
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, screen_size):
+    def __init__(self, screen_size, width=50, height=50):
         """
         Represents the player in the game.
 
@@ -29,11 +29,12 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.screen_size = screen_size
         print("Spawning player")
-        self.surf = pygame.image.load('image/player_pixel.png').convert_alpha()
+        self.surf = pygame.image.load('image/player.png').convert_alpha()
         self.surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
         self.rect = self.surf.get_rect()
         self.rect.move_ip(self.screen_size[0]//2, self.screen_size[1]//2)
         self.size = 5
+        self.surf = pygame.transform.scale(self.surf, (width, height)) #changes height and width of monster
 
 
     def movement(self, keys):
@@ -52,6 +53,9 @@ class Player(pygame.sprite.Sprite):
             self.rect.move_ip(3, 0)
         elif keys[pygame.K_LEFT]:
             self.rect.move_ip(-3, 0)
+
+        self.rect.x = max(0, min(self.rect.x, self.screen_size[0] - self.rect.width))  #keeps player in boundary
+        self.rect.y = max(0, min(self.rect.y, self.screen_size[1] - self.rect.height))
 
     def take_damage(self):
         """

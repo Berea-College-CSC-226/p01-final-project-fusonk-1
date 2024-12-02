@@ -15,6 +15,7 @@
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
 ####################################################################################
 from player import *
+from monster import *
 
 import pygame
 
@@ -28,8 +29,9 @@ class Game:
         pygame.init()
         self.size = (200,200) #Window size
         self.screen = pygame.display.set_mode(self.size)
-        self.screen.fill('white')
-        self.red_block = Player(self.size)
+        self.player = Player(self.size)
+        self.monster = Monster(self.size)
+
 
     def game_loop(self):
         """
@@ -38,14 +40,17 @@ class Game:
         """
         run = True
         while run:
-            self.screen.fill('gray')
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                     run = False
-        self.red_block.movement(pygame.key.get_pressed())
-        self.screen.blit(self.red_block.surf, self.red_block.rect)
+                    run = False
+            self.screen.fill('gray')
+        # self.player.movement(pygame.key.get_pressed())
+            keys = pygame.key.get_pressed()  # Get currently pressed keys
+            self.player.movement(keys)  # Update player position based on keys
+            self.screen.blit(self.player.surf, self.player.rect)  #spawn player
+            self.screen.blit(self.monster.surf, self.monster.rect) #spawns monster
 
-        pygame.display.update()
+            pygame.display.update() #updates the screen to fix screen turning black
 
     def game_over(self):
         """
@@ -71,7 +76,9 @@ def main():
     :return: None
     """
     game = Game()
+    pygame.display.update()
     game.game_loop()
+
 
 if __name__ == "__main__":
     main()

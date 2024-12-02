@@ -19,10 +19,25 @@ from player import *
 from dungeon import *
 
 
-class monster:
-    def __init__(self):
+class Monster:
+    def __init__(self,screen_size, width=50, height=50):
         """
         Handles the basic logic needed to create monsters
+        """
+        super().__init__()
+        self.screen_size = screen_size
+        print("Spawning player")
+        self.surf = pygame.image.load('image/enemy.png').convert_alpha()
+        self.surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
+        self.rect = self.surf.get_rect()
+        self.rect.move_ip(self.screen_size[0] // 2, self.screen_size[1] // 2)
+        self.size = 5
+        self.surf = pygame.transform.scale(self.surf, (width, height)) #changes height and width of monster
+
+    def movement(self):
+        """
+        Moves the characters in a pattern
+        :return:
         """
         pass
 

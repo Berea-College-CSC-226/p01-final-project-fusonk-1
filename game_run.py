@@ -9,12 +9,13 @@
 #
 ######################################################################
 # Acknowledgements:
-#
+# https://www.pygame.org/docs/ref/display.html for updating display, as well as just general pygame tools
 #
 # licensed under a Creative Commons
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
 ####################################################################################
 from player import *
+from item import *
 from monster import *
 
 import pygame
@@ -31,6 +32,7 @@ class Game:
         self.screen = pygame.display.set_mode(self.size)
         self.player = Player(self.size)
         self.monster = Monster(self.size)
+        self.chest = Item(self.size)
 
 
     def game_loop(self):
@@ -49,6 +51,7 @@ class Game:
             self.player.movement(keys)  # Update player position based on keys
             self.screen.blit(self.player.surf, self.player.rect)  #spawn player
             self.screen.blit(self.monster.surf, self.monster.rect) #spawns monster
+            self.screen.blit(self.chest.surf, self.chest.rect)  # spawns chest
 
             pygame.display.update() #updates the screen to fix screen turning black
 

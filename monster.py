@@ -26,13 +26,15 @@ class Monster:
         """
         super().__init__()
         self.screen_size = screen_size
-        print("Spawning player")
+        print("Spawning monster")
         self.surf = pygame.image.load('image/enemy.png').convert_alpha()
         self.surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
         self.rect = self.surf.get_rect()
         self.rect.move_ip(self.screen_size[0] // 2, self.screen_size[1] // 2)
         self.size = 5
         self.surf = pygame.transform.scale(self.surf, (width, height)) #changes height and width of monster
+        self.rect.x = screen_size[0] - width  # Right of screen, changes spawn point
+        self.rect.y = 0  # Top of screen, changes spawn point
 
     def movement(self):
         """

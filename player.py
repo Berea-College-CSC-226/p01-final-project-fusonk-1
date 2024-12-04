@@ -40,6 +40,7 @@ class Player(pygame.sprite.Sprite):
         self.move_distance = 0
         self.position = [0,0]
 
+
     def boundaries(self):
         """
         Keep player from leaving boundaries

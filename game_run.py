@@ -89,7 +89,7 @@ def main():
     """
     game = Game()
     # pygame.display.update()
-    game.game_loop()
+    game.game_loop(game.damage)
 
 
 if __name__ == "__main__":

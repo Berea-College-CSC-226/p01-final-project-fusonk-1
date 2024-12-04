@@ -15,6 +15,10 @@
 Throughout this project, you have likely used outside resources. Reference all ideas which are not your own, 
 and describe how you integrated the ideas or code into your program. This includes online sources, people who have 
 helped you, AI tools you've used, and any other resources that are not solely your own contribution. Update as you go.
+https://www.pygame.org/docs/ref/display.html
+https://www.pygame.org/docs/ref/sprite.html
+https://github.com/search?q=pygame.sprite.collide_rect+language%3APython&type=Code&l=Python
+https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.Sprite.kill
 
 ---
 

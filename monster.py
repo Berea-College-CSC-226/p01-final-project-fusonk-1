@@ -38,6 +38,7 @@ class Monster:
         self.health = 2
         # self.damage = 1
 
+
     # def direction(self):
     #     """
     #     Choose a direction for movement purposes
@@ -77,4 +78,6 @@ class Monster:
    # self.kill() #Thought this method removed sprites, but looks like it just removes it from group?
    #      self.rect.y = 10 Test piece of code, appears as though the collide method has something wrong with it
     #
-        self.rect.y = 10
+        self.rect.y = 50
+        self.alive = False
+        print("A monster has died") #just for testing purposes

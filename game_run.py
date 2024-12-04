@@ -10,7 +10,7 @@
 ######################################################################
 # Acknowledgements:
 # https://www.pygame.org/docs/ref/display.html for updating display, as well as just general pygame tools
-#
+# https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.collide_rect - More collision Information
 # licensed under a Creative Commons
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
 ####################################################################################
@@ -57,10 +57,11 @@ class Game:
             self.screen.blit(self.chest.surf, self.chest.rect)  # spawns chest
 
             #Collision Interaction - Player damages Monster
-            if pygame.sprite.spritecollide(self.player, self.monster, dokill = False):
+            ##tests for collision between two sprites, specifically sprites with rect function.
+            if pygame.sprite.collide_rect(self.player, self.monster):  #Only this collision type works as expected, do not remove!
                 if keys[pygame.K_f]:
-                    hp = Monster.take_damage(self.monster, damage)
-                    hp()
+                    Monster.take_damage(self.monster, damage)
+
 
             pygame.display.update() #updates the screen to fix screen turning black
 
@@ -89,7 +90,7 @@ def main():
     """
     game = Game()
     # pygame.display.update()
-    game.game_loop(game.damage)
+    game.game_loop(game.damage)  #Passed parameter into loop
 
 
 if __name__ == "__main__":

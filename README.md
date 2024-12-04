@@ -71,14 +71,18 @@ What has surprised you so far? Describe your general feelings. Be honest with yo
 
 Indicate what percentage of the project you have left to complete and how confident you feel. 
 
-❗️**Completion Percentage**: `0 - 100%`
+❗️**Completion Percentage**: `45%`
 
 ❗️**Confidence**: Describe how confident you feel about completing this project, and why. Then, describe some 
   strategies you can employ to increase the likelihood that you'll be successful in completing this project 
   before the deadline.
 
 ```
-    **Replace this text with your reflection
+    **I don't feel confident about finishing everything that I wanted to do with this assignment. I took on a lot, and
+    the code was ended up being more complicated to implement, which I knew it was going to be. Some strategies to increase the likeleyhood I'll be
+    successful in completing the project are by lowering the scope of my project. By that I mean to do what is necessary to get the code working and worry about
+    the look and feel a bit after. Maybe doing something more like stages rather than seperate rooms, such as having monsters spawn after each stage, and having a 
+    the death be the end of the game, or a set number of monsters you have to fight to win. I will also work on it a bit more over the weekend, aswell as the week coming up.
 ```
 
 ---

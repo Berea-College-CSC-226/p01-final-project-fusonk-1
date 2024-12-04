@@ -9,7 +9,7 @@
 #
 ######################################################################
 # Acknowledgements:
-#
+# https://www.pygame.org/docs/ref/sprite.html - Killing Sprites using .kill
 #
 # licensed under a Creative Commons
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
@@ -34,7 +34,8 @@ class Monster:
         self.size = 5
         self.surf = pygame.transform.scale(self.surf, (width, height)) #changes height and width of monster
         self.rect.x = screen_size[0] - width  # Right of screen, changes spawn point
-        self.rect.y = 0  # Top of screen, changes spawn point
+        self.rect.y = 4  # Top of screen, changes spawn point
+        self.health = 2
 
     # def direction(self):
     #     """
@@ -47,7 +48,7 @@ class Monster:
         Moves the characters in a pattern
         :return:
         """
-
+        #Eventual momvement of monster
         self.rect.move_ip(0, -3)
         self.rect.move_ip(0, 3)
 
@@ -57,7 +58,8 @@ class Monster:
         :param player:
         :return:
         """
-        pass
+
+
 
     def take_damage(self):
         """
@@ -65,4 +67,12 @@ class Monster:
         :param:
         :return:
         """
+        #Trying to make monster take damage
+        self.health -= self.health
+        if self.health <= 0:
+            self.die()
+
+    def die(self):
+   # self.kill() #Thought this method removed sprites, but looks like it just removes it from group?
+   #      self.rect.y = 10 Test piece of code, appears as though the collide method has something wrong with it
         pass

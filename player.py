@@ -9,12 +9,14 @@
 #
 ######################################################################
 # Acknowledgements:
-#
+# Collision Examples- https://github.com/search?q=pygame.sprite.collide_rect+language%3APython&type=Code&l=Python
+# Collision examples found on - https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.Sprite.kill
 #
 # licensed under a Creative Commons
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
 ####################################################################################
 import pygame
+from monster import *
 import time
 # from dungeon import *
 # from item import *
@@ -32,14 +34,32 @@ class Player(pygame.sprite.Sprite):
         print("Spawning player")
         self.surf = pygame.image.load('image/player.png').convert_alpha()
         self.surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
-        self.surf = pygame.transform.scale(self.surf, (width, height))  # changes height
+        #self.surf = pygame.transform.scale(self.surf, (width, height))  # changes height
         self.rect = self.surf.get_rect()
         self.rect.move_ip(self.screen_size[0]//2, self.screen_size[1]//2)
         self.move_distance = 0
         self.position = [0,0]
-        # self.size = 5
-        # self.surf = pygame.transform.scale(self.surf, (width, height)) #changes height and width of monster
 
+    def boundaries(self):
+        """
+        Keep player from leaving boundaries
+        :return:
+        """
+        #Attempting to create better boundaries
+        if self.rect.bottom >self.screen_size[1]:
+            self.rect.bottom = self.screen_size[1]
+            self.direction = "north"
+        elif self.rect.top <0:
+            self.rect.top = 0
+            self.direction = "south"
+        elif self.rect.left <0:
+            self.rect.left = 0
+            self.direction = "east"
+        elif self.rect.right >self.screen_size[0]:
+            self.rect.right = self.screen_size[0]
+            self.direction = "west"
+        else:
+            self.direction = "none"
 
     def movement(self, keys):
         """
@@ -49,13 +69,7 @@ class Player(pygame.sprite.Sprite):
 
         :return: None
         """
-        #Trying to prevent the sprite from moving if it touches a wall
-        # if self.rect.move_ip(self.move_distance, 0):
-        #     # self.rect.move_ip(0,0)
-        #     self.rect.move_ip(-self.move_distance, 0)
-        #     self.position[0] += self.move_distance
-
-
+        #Attempting better movement
         if keys[pygame.K_UP]:
             self.rect.move_ip(0, -1)
         elif keys[pygame.K_DOWN]:
@@ -64,17 +78,9 @@ class Player(pygame.sprite.Sprite):
             self.rect.move_ip(1, 0)
         elif keys[pygame.K_LEFT]:
             self.rect.move_ip(-1, 0)
+        self.boundaries()
 
-        # self.rect.move_ip(self.move_distance, 0)  # Checks if we hit a wall
-        # if self.rect.right >= self.screen_size[0]:
-        #     self.direction = "left"  # Switches direction left when we hit a wall
-        #     self.rect.move_ip(0, self.move_distance)  # Moves down
-        #
-        #   elif self.direction == "left":
-        #       self.rect.move_ip(-self.move_distance, 0)  # Checks if we hit wall
-        #      if self.rect.left <= 0:
-        #         self.direction = "right"  # Switch direction to right
-        #       self.rect.move_ip(0, self.move_distance)  # move down
+
 
     def take_damage(self):
         """
@@ -90,7 +96,12 @@ class Player(pygame.sprite.Sprite):
         :param monster:
         :return:
         """
-        pass
+        #Attempting hitbox/damage
+        hit = pygame.sprite.spritecollide(self, monster)
+        if hit == True:
+            if keys[pygame.K_F1]:
+                monster.take_damage(1)
+
 
     def add_item(self):
         """

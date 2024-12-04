@@ -31,9 +31,6 @@ class Game:
         self.player = Player(self.size)
         self.monster = Monster(self.size)
         self.chest = Item(self.size)
-        # self.hp = Monster(self.health)
-        # self.health = Monster(self.health)
-        # self.attack = Monster(self.damage)
         self.damage = 1
 
 

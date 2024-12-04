@@ -97,12 +97,7 @@ class Player(pygame.sprite.Sprite):
         :param monster:
         :return:
         """
-        #Attempting hitbox/damage
-        # hit = pygame.sprite.spritecollide(self.player, monster)
-        # if hit == True:
-        #     if keys[pygame.K_f]:
-        #         monster.take_damage(1)
-
+        pass
 
     def add_item(self):
         """

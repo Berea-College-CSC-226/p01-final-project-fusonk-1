@@ -115,3 +115,4 @@ class Player(pygame.sprite.Sprite):
         allows player to use item in inventory, removes item if needed
         :return:
         """
+        pass

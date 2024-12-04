@@ -28,7 +28,7 @@ class dungeon:
 
     def is_exit(self,player_position):
         """
-        Checks if player has reached the end of the dungeon
+        Checks if player has reached the end of the dungeon TO DO: add end of game
         :param player_position:
         :return:
         """
@@ -36,7 +36,7 @@ class dungeon:
 
     def next_level(self):
         """
-        Re-arranges room to next level
+        Re-arranges room to next level TO DO: Create waves instead of traditional levels
         :return:
         """
         pass

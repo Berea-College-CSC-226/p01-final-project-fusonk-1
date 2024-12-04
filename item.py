@@ -32,14 +32,6 @@ class Item:
         self.size = 5
         self.surf = pygame.transform.scale(self.surf, (width, height))
         self.rect.x = screen_size[0] - width  # Right of screen, changes spawn point
-        self.rect.y = 0  # Top of screen, changes spawn point
+        self.rect.y = 20  # Top of screen, changes spawn point
         # changes height and width
-
-    def apply_effect(self, player):
-        """
-        gives a player an effect or pop up based on item
-        :param player:
-        :return:
-        """
-        pass
 

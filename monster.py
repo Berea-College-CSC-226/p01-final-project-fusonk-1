@@ -36,12 +36,12 @@ class Monster:
         self.rect.x = screen_size[0] - width  # Right of screen, changes spawn point
         self.rect.y = 4  # Top of screen, changes spawn point
         self.health = 2
-        # self.damage = 1
+
 
 
     def direction(self):
         """
-        Choose a direction for movement purposes
+        Choose a direction for movement purposes TO DO: Create a back and forth motion for monsters, use legend of Tuna as base
         :return:
         """
         pass
@@ -54,13 +54,6 @@ class Monster:
         #Eventual momvement of monster
         self.rect.move_ip(0, -3)
         self.rect.move_ip(0, 3)
-
-    def attack_player(self, player):
-        """
-        calculates the monsters attack, as well as sees if the monster can attack
-        :param player:
-        :return:
-        """
 
 
 

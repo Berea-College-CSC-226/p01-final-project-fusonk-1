@@ -16,8 +16,9 @@
 ####################################################################################
 
 from inspect import getframeinfo, stack
+from game_run import Game
 
-def unittest(did_pass):
+def unittest(self, did_pass):
     """
     Prints the result of a test
     :param did_pass: a boolean representing the test
@@ -31,4 +32,16 @@ def unittest(did_pass):
     else:
         msg = ("Test at line {0} FAILED.".format(linenum))
     print(msg)
+
+    self.game = Game()
+
+    def test_monster():
+        """
+        Test if monster takes damage correctly
+        :return:
+        """
+        monster = self.game.monster()
+        monster.take_damage(1)
+
+        #Currently monster is taking too much damage at one time
 

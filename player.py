@@ -91,24 +91,4 @@ class Player(pygame.sprite.Sprite):
         """
         pass
 
-    def attack_monster(self, monster):
-        """
-        calculates damage done to monster, and if it can be hit
-        :param monster:
-        :return:
-        """
-        pass
 
-    def add_item(self):
-        """
-        Adds items to the player main screen (gold), or other
-        :return:
-        """
-        pass
-
-    def use_item(self):
-        """
-        allows player to use item in inventory, removes item if needed
-        :return:
-        """
-        pass

@@ -97,10 +97,10 @@ class Player(pygame.sprite.Sprite):
         :return:
         """
         #Attempting hitbox/damage
-        hit = pygame.sprite.spritecollide(self, monster)
-        if hit == True:
-            if keys[pygame.K_F1]:
-                monster.take_damage(1)
+        # hit = pygame.sprite.spritecollide(self.player, monster)
+        # if hit == True:
+        #     if keys[pygame.K_f]:
+        #         monster.take_damage(1)
 
 
     def add_item(self):

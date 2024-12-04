@@ -15,9 +15,7 @@
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
 ####################################################################################
 from player import *
-from item import *
 from monster import *
-
 import pygame
 
 
@@ -33,9 +31,13 @@ class Game:
         self.player = Player(self.size)
         self.monster = Monster(self.size)
         self.chest = Item(self.size)
+        # self.hp = Monster(self.health)
+        # self.health = Monster(self.health)
+        # self.attack = Monster(self.damage)
+        self.damage = 1
 
 
-    def game_loop(self):
+    def game_loop(self, damage):
         """
         Handles running the game
         :return:
@@ -45,14 +47,20 @@ class Game:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
+
             self.screen.fill('gray')
-        # self.player.movement(pygame.key.get_pressed())
+            self.player.movement(pygame.key.get_pressed())
             keys = pygame.key.get_pressed()  # Get currently pressed keys
             self.player.movement(keys)  # Update player position based on keys
-
             self.screen.blit(self.player.surf, self.player.rect)  #spawn player
             self.screen.blit(self.monster.surf, self.monster.rect) #spawns monster
             self.screen.blit(self.chest.surf, self.chest.rect)  # spawns chest
+
+            #Collision Interaction - Player damages Monster
+            if pygame.sprite.spritecollide(self.player, self.monster, dokill = False):
+                if keys[pygame.K_f]:
+                    hp = Monster.take_damage(self.monster, damage)
+                    hp()
 
             pygame.display.update() #updates the screen to fix screen turning black
 

@@ -36,6 +36,7 @@ class Monster:
         self.rect.x = screen_size[0] - width  # Right of screen, changes spawn point
         self.rect.y = 4  # Top of screen, changes spawn point
         self.health = 2
+        # self.damage = 1
 
     # def direction(self):
     #     """
@@ -61,14 +62,14 @@ class Monster:
 
 
 
-    def take_damage(self):
+    def take_damage(self, damage):
         """
         calculates the damage the monster takes after its been hit
         :param:
         :return:
         """
         #Trying to make monster take damage
-        self.health -= self.health
+        self.health -= damage
         if self.health <= 0:
             self.die()
 
@@ -76,4 +77,4 @@ class Monster:
    # self.kill() #Thought this method removed sprites, but looks like it just removes it from group?
    #      self.rect.y = 10 Test piece of code, appears as though the collide method has something wrong with it
     #
-        pass
+        self.rect.y = 10

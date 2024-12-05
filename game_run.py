@@ -11,6 +11,7 @@
 # Acknowledgements:
 # https://www.pygame.org/docs/ref/display.html for updating display, as well as just general pygame tools
 # https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.collide_rect - More collision Information
+#https://www.pygame.org/docs/ref/time.html#pygame.time.delay - delay/Timer
 # licensed under a Creative Commons
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
 ####################################################################################
@@ -32,6 +33,7 @@ class Game:
         self.monster = Monster(self.size)
         self.chest = Item(self.size)
         self.damage = 1
+        self.enemy_invincible = False
 
 
     def game_loop(self, damage):
@@ -56,8 +58,12 @@ class Game:
             #Collision Interaction - Player damages Monster
             ##tests for collision between two sprites, specifically sprites with rect function.
             if pygame.sprite.collide_rect(self.player, self.monster):  #Only this collision type works as expected, do not remove!
-                if keys[pygame.K_f]:
-                    Monster.take_damage(self.monster, damage)
+                   if keys[pygame.K_f]:
+                       if self.enemy_invincible == False: #Checks if monster is able to be hurt
+                           Monster.take_damage(self.monster, damage)
+                           self.enemy_invincible = True #makes it so monster cant be hurt
+                           pygame.time.delay(200) #Timer delays in milliseconds
+                           self.enemy_invincible = False
 
 
             pygame.display.update() #updates the screen to fix screen turning black

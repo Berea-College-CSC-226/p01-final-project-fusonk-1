@@ -38,7 +38,6 @@ class Monster:
         self.health = 2
 
 
-
     def direction(self):
         """
         Choose a direction for movement purposes TO DO: Create a back and forth motion for monsters, use legend of Tuna as base

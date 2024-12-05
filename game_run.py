@@ -53,6 +53,21 @@ class Game:
             self.screen.blit(self.monster.surf, self.monster.rect) #spawns monster
             self.screen.blit(self.chest.surf, self.chest.rect)  # spawns chest
 
+            # Display Text
+            font = pygame.font.SysFont("ComicSans", 10)
+            #Health text
+            txt = font.render('Health', True, "darkblue")
+            self.screen.blit(txt, (self.size[0] // 16, self.size[1] - 200)) #Division, and minus changes the place where the text spawns
+
+            #text must be a unicode or bytes below, so ask if way to display a num that changes
+
+            player_health = font.render(self.player.hp, True, "darkblue")
+            self.screen.blit(player_health,(self.size[0] // 14, self.size[1]-200))
+
+            #Gold Text
+            text = font.render('Gold', True, "darkblue")
+            self.screen.blit(text, (self.size[0] // 2, self.size[1] - 200))
+
             #Collision Interaction - Player damages Monster
             ##tests for collision between two sprites, specifically sprites with rect function.
             if pygame.sprite.collide_rect(self.player, self.monster):  #Only this collision type works as expected, do not remove!

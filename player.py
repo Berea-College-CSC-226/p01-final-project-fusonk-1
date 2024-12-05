@@ -39,6 +39,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.move_ip(self.screen_size[0]//2, self.screen_size[1]//2)
         self.move_distance = 0
         self.position = [0,0]
+        self.hp = 5
 
 
     def boundaries(self):

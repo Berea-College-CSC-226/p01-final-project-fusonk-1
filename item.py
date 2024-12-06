@@ -33,5 +33,6 @@ class Item:
         self.surf = pygame.transform.scale(self.surf, (width, height))
         self.rect.x = screen_size[0] - width  # Right of screen, changes spawn point
         self.rect.y = 40  # Top of screen, changes spawn point
+        self.gold = 0
         # changes height and width
 

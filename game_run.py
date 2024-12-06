@@ -11,6 +11,7 @@
 # Acknowledgements:
 # https://www.pygame.org/docs/ref/display.html for updating display, as well as just general pygame tools
 # https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.collide_rect - More collision Information
+# str(self.player.hp) - converting a int into a string for display - Professor Hegan
 # licensed under a Creative Commons
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
 ####################################################################################
@@ -59,14 +60,17 @@ class Game:
             txt = font.render('Health', True, "darkblue")
             self.screen.blit(txt, (self.size[0] // 16, self.size[1] - 200)) #Division, and minus changes the place where the text spawns
 
-            #text must be a unicode or bytes below, so ask if way to display a num that changes
-
-            player_health = font.render(self.player.hp, True, "darkblue")
-            self.screen.blit(player_health,(self.size[0] // 14, self.size[1]-200))
+            #str converts the int into a string for display
+            player_health = font.render(str(self.player.hp), True, "darkblue")
+            self.screen.blit(player_health,(self.size[0] // 4, self.size[1]-200))
 
             #Gold Text
             text = font.render('Gold', True, "darkblue")
-            self.screen.blit(text, (self.size[0] // 2, self.size[1] - 200))
+            self.screen.blit(text, (self.size[0] //3, self.size[1] - 200))
+
+            #converts the int into str for display
+            t = font.render(str(self.chest.gold), True, "darkblue")
+            self.screen.blit(t, (self.size[0]//2, self.size[1] - 200))
 
             #Collision Interaction - Player damages Monster
             ##tests for collision between two sprites, specifically sprites with rect function.

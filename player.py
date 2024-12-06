@@ -84,12 +84,19 @@ class Player(pygame.sprite.Sprite):
 
 
 
-    def take_damage(self):
+    def take_damage(self, damage):
         """
         calculates the damage the player takes after its been hit, and reduces health
         :param:
         :return:
         """
-        pass
+        self.hp -= damage
+        if self.hp <= 0:
+            self.die()
+
+    def die(self):
+        self.rect.y = 50
+        self.alive = False
+        print("A player has died") #just for testing purposes
 
 

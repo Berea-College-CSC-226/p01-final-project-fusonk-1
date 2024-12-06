@@ -16,11 +16,12 @@
 # licensed under a Creative Commons
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
 ####################################################################################
+from random import randint
+
 from player import *
 from monster import *
+from attack import *
 import pygame
-
-
 
 class Game:
     def __init__(self):
@@ -32,9 +33,12 @@ class Game:
         self.screen = pygame.display.set_mode(self.size)
         self.player = Player(self.size)
         self.monster = Monster(self.size)
+        self.attack = Attack(self.size)
         self.chest = Item(self.size)
         self.damage = 1
         self.enemy_invincible = False
+        self.chest_empty = False
+        self.player_invincible = False
 
 
     def game_loop(self, damage):
@@ -83,6 +87,21 @@ class Game:
                            self.enemy_invincible = True #makes it so monster cant be hurt
                            pygame.time.delay(200) #Timer delays in milliseconds
                            self.enemy_invincible = False
+
+            #Collision Interaction - Enemy attacks player
+            # if pygame.sprite.collide_rect(self.player,self.monster):
+            #     if self.player_invincible == False:
+            #         Player.take_damage(self.player,damage)
+            #         self.player_invincible = True
+            #         pygame.time.delay(200)
+            #         self.player_invincible = False
+
+            #Collision Interaction - Chest and Player
+            if pygame.sprite.collide_rect(self.player,self.chest):
+                if keys[pygame.K_a]:
+                    if self.chest_empty == False:
+                        self.chest.gold += randint(20,100)
+                        self.chest_empty = True
 
 
             pygame.display.update() #updates the screen to fix screen turning black

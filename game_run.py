@@ -58,6 +58,7 @@ class Game:
             self.player.movement(keys)  # Update player position based on keys
             self.screen.blit(self.player.surf, self.player.rect)  #spawn player
             self.screen.blit(self.monster.surf, self.monster.rect) #spawns monster
+            self.screen.blit(self.attack.surf, self.attack.rect)
             self.screen.blit(self.chest.surf, self.chest.rect)  # spawns chest
 
             # Display Text
@@ -89,12 +90,13 @@ class Game:
                            self.enemy_invincible = False
 
             #Collision Interaction - Enemy attacks player
-            # if pygame.sprite.collide_rect(self.player,self.monster):
-            #     if self.player_invincible == False:
-            #         Player.take_damage(self.player,damage)
-            #         self.player_invincible = True
-            #         pygame.time.delay(200)
-            #         self.player_invincible = False
+            if pygame.sprite.collide_rect(self.player,self.attack):
+                if self.player_invincible == False:
+                    Player.take_damage(self.player,damage)
+
+                    self.player_invincible = True
+                    pygame.time.delay(1000)
+                    self.player_invincible = False
 
             #Collision Interaction - Chest and Player
             if pygame.sprite.collide_rect(self.player,self.chest):

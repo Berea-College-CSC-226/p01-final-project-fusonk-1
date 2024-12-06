@@ -21,6 +21,7 @@ https://github.com/search?q=pygame.sprite.collide_rect+language%3APython&type=Co
 https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.Sprite.kill
 https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.collide_rect
 https://www.pygame.org/docs/ref/time.html#pygame.time.delay
+str(self.player.hp) - converting a int into a string for display - Professor Hegan
 ---
 
 ## Milestone 1: Setup, Planning, Design

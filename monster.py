@@ -19,7 +19,7 @@ from player import *
 from dungeon import *
 
 
-class Monster:
+class Monster():
     def __init__(self,screen_size, width=50, height=50):
         """
         Handles the basic logic needed to create monsters
@@ -65,9 +65,15 @@ class Monster:
         #Trying to make monster take damage
         self.health -= damage
         if self.health <= 0:
-            self.die()
+            self.kill()
 
-    def die(self):
-        self.rect.y = 50
-        self.alive = False
-        print("A monster has died") #just for testing purposes
+    def kill(self):
+        print("Despawn monster")
+    #     pygame.sprite.Sprite.kill(self)
+
+
+    # def die(self):
+    #     self.rect.y = 50
+    #     self.alive = False
+    #     # pygame.sprite.Monster.kill(self)
+    #     print("A monster has died") #just for testing purposes

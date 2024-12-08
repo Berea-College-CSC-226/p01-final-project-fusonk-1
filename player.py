@@ -92,11 +92,15 @@ class Player(pygame.sprite.Sprite):
         """
         self.hp -= damage
         if self.hp <= 0:
-            self.die()
+            self.kill()
 
-    def die(self):
-        self.rect.y = 50
-        self.alive = False
-        print("A player has died") #just for testing purposes
+    def kill(self):
+        print("Despawn player")
+        pygame.sprite.Sprite.kill(self)
+
+    # def die(self):
+    #     self.rect.y = 50
+    #     self.alive = False
+    #     print("A player has died") #just for testing purposes
 
 

@@ -86,17 +86,17 @@ class Game:
                        if self.enemy_invincible == False: #Checks if monster is able to be hurt
                            Monster.take_damage(self.monster, damage)
                            self.enemy_invincible = True #makes it so monster cant be hurt
-                           pygame.time.delay(200) #Timer delays in milliseconds
+                           pygame.time.delay(1000) #Timer delays in milliseconds
                            self.enemy_invincible = False
 
             #Collision Interaction - Enemy attacks player
-            if pygame.sprite.collide_rect(self.player,self.attack):
-                if self.player_invincible == False:
-                    Player.take_damage(self.player,damage)
-
-                    self.player_invincible = True
-                    pygame.time.delay(1000)
-                    self.player_invincible = False
+            # if pygame.sprite.collide_rect(self.player,self.attack):
+            #     if self.player_invincible == False:
+            #         Player.take_damage(self.player,damage)
+            #
+            #         self.player_invincible = True
+            #         pygame.time.delay(1000)
+            #         self.player_invincible = False
 
             #Collision Interaction - Chest and Player
             if pygame.sprite.collide_rect(self.player,self.chest):
@@ -107,6 +107,11 @@ class Game:
 
 
             pygame.display.update() #updates the screen to fix screen turning black
+
+
+
+    # def kill(self,enemy):
+    #         pygame.sprite.Sprite.kill(self)
 
     def game_over(self):
         """

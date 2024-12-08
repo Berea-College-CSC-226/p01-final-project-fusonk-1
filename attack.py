@@ -32,4 +32,14 @@ class Attack:
     def die(self):
         self.rect.y = 50
         self.alive = False
+        # self.kill()
         print("An attack has despawned") #just for testing purposes
+
+
+    # def kill(self):
+    #     print("Despawn attack")
+    #     pygame.sprite.Sprite.kill(self)
+
+    # def kill(self):
+    #     if self.alive == False:
+    #        pygame.sprite.Sprite.kill(self.Attack)

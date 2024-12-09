@@ -96,7 +96,7 @@ class Player(pygame.sprite.Sprite):
 
     def kill(self):
         print("Despawn player")
-        pygame.sprite.Sprite.kill(self)
+        # pygame.sprite.Sprite.kill(self)
 
     # def die(self):
     #     self.rect.y = 50

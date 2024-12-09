@@ -22,6 +22,7 @@ https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.Sprite.kill
 https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.collide_rect
 https://www.pygame.org/docs/ref/time.html#pygame.time.delay
 str(self.player.hp) - converting a int into a string for display - Professor Hegan
+https://www.youtube.com/watch?v=4TfZjhw0J-8 - sprite groups explained
 ---
 
 ## Milestone 1: Setup, Planning, Design

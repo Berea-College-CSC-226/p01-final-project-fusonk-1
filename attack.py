@@ -16,6 +16,7 @@ class Attack:
         self.surf = pygame.transform.scale(self.surf, (width, height))  # changes height and width of monster
         self.rect.x = screen_size[0] - width  # Right of screen, changes spawn point
         self.health = 2
+        self.alive = True
 
 
     def take_damage(self, damage):

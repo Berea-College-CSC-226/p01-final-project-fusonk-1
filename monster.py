@@ -10,7 +10,7 @@
 ######################################################################
 # Acknowledgements:
 # https://www.pygame.org/docs/ref/sprite.html - Killing Sprites using .kill
-#
+# https://www.youtube.com/watch?v=4TfZjhw0J-8 - sprite groups explained
 # licensed under a Creative Commons
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
 ####################################################################################
@@ -19,7 +19,7 @@ from player import *
 from dungeon import *
 
 
-class Monster():
+class Monster(pygame.sprite.Sprite):
     def __init__(self,screen_size, width=50, height=50):
         """
         Handles the basic logic needed to create monsters
@@ -36,6 +36,7 @@ class Monster():
         self.rect.x = screen_size[0] - width  # Right of screen, changes spawn point
         self.rect.y = 4  # Top of screen, changes spawn point
         self.health = 2
+        self.alive = True
 
 
     def direction(self):
@@ -69,11 +70,6 @@ class Monster():
 
     def kill(self):
         print("Despawn monster")
-    #     pygame.sprite.Sprite.kill(self)
 
+        self.alive = False
 
-    # def die(self):
-    #     self.rect.y = 50
-    #     self.alive = False
-    #     # pygame.sprite.Monster.kill(self)
-    #     print("A monster has died") #just for testing purposes

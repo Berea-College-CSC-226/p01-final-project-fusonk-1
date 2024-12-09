@@ -40,7 +40,6 @@ class Game:
         self.chest_empty = False
         self.player_invincible = False
 
-
     def game_loop(self, damage):
         """
         Handles running the game
@@ -85,6 +84,7 @@ class Game:
                    if keys[pygame.K_f]:
                        if self.enemy_invincible == False: #Checks if monster is able to be hurt
                            Monster.take_damage(self.monster, damage)
+                           # self.monster.update()
                            self.enemy_invincible = True #makes it so monster cant be hurt
                            pygame.time.delay(1000) #Timer delays in milliseconds
                            self.enemy_invincible = False
@@ -108,10 +108,6 @@ class Game:
 
             pygame.display.update() #updates the screen to fix screen turning black
 
-
-
-    # def kill(self,enemy):
-    #         pygame.sprite.Sprite.kill(self)
 
     def game_over(self):
         """

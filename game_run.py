@@ -23,12 +23,13 @@ from monster import *
 from attack import *
 import pygame
 
-class Game:
+class Game(pygame.sprite.Sprite):
     def __init__(self):
         """
         Handles the basic logic needed to actually run the game
         """
         pygame.init()
+        pygame.sprite.Sprite.__init__(self)  # Calls the sprite methods from pygame sprite
         self.size = (200,200) #Window size
         self.screen = pygame.display.set_mode(self.size)
         self.player = Player(self.size)
@@ -39,6 +40,15 @@ class Game:
         self.enemy_invincible = False
         self.chest_empty = False
         self.player_invincible = False
+
+        # Create sprite groups
+        self.all_sprites = pygame.sprite.Group()  # Group for all sprites
+        self.monster_group = pygame.sprite.Group()  # Separate group for monsters
+
+        # Add sprites to groups
+        self.all_sprites.add(self.monster)
+        self.monster_group.add(self.monster)
+
 
     def game_loop(self, damage):
         """
@@ -55,8 +65,9 @@ class Game:
             self.player.movement(pygame.key.get_pressed())
             keys = pygame.key.get_pressed()  # Get currently pressed keys
             self.player.movement(keys)  # Update player position based on keys
+            self.all_sprites.draw(self.screen)
             self.screen.blit(self.player.surf, self.player.rect)  #spawn player
-            self.screen.blit(self.monster.surf, self.monster.rect) #spawns monster
+            # self.screen.blit(self.monster.surf, self.monster.rect) #spawns monster
             self.screen.blit(self.attack.surf, self.attack.rect)
             self.screen.blit(self.chest.surf, self.chest.rect)  # spawns chest
 

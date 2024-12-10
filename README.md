@@ -23,6 +23,7 @@ https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.collide_rect
 https://www.pygame.org/docs/ref/time.html#pygame.time.delay
 str(self.player.hp) - converting a int into a string for display - Professor Hegan
 https://www.youtube.com/watch?v=4TfZjhw0J-8 - sprite groups explained
+https://www.pygame.org/docs/ref/image.html#pygame.image.load - images for sprites
 ---
 
 ## Milestone 1: Setup, Planning, Design
@@ -113,3 +114,14 @@ In three to four well-written paragraphs, address the following (at a minimum):
 - What was the hardest part of the final project?
 - What would you do differently next time, knowing what you know now?
 - (For partners) How well did you work with your partner? What made it go well? What made it challenging?
+
+I selected my project, because I enjoy games and I wasn't great at coding so I wanted to take on
+a bigger project in order to try and increase my skills, while learning how to create games, because
+I enjoy making games. I knew this would be hard to create, and it has been. My final project is a bit different from
+what I was originally planning to create, I've had to change where some items run because they were game mechanics
+not sprite mechanics, I've had to ____________. Continue later, Im gonna take a small break.
+
+. I certainly haven't been
+able to do everything I wanted to, but I don't regret trying to make a small dungeon crawler, because I feel like I've learned so much.
+I've learned how to handle sprite collisions better, how to group sprites, how to create sprites, how to add
+text to the screen when its updating,ect.

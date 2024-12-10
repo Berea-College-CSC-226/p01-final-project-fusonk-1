@@ -16,6 +16,7 @@
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
 ####################################################################################
 import pygame
+import random
 from player import *
 from dungeon import *
 
@@ -44,6 +45,11 @@ class Monster(pygame.sprite.Sprite): #Monster is child of sprite class
         self.rect.x = 10 #screen_size[0] - width  # Right of screen, changes spawn point
         self.rect.y = 4  # Top of screen, changes spawn point
         self.health = 2
+        #Code from tuna teamwork
+        self.move_distance = 2
+        self.directions = ["north", "south", "east", "west"]
+        self.path = random.choice(self.directions)
+        self.position = [0, 0]
 
 
 
@@ -53,7 +59,13 @@ class Monster(pygame.sprite.Sprite): #Monster is child of sprite class
         Choose a direction for movement purposes TO DO: Create a back and forth motion for monsters, use legend of Tuna as base
         :return:
         """
-        pass
+
+        def get_directions(self):
+            """
+            Keeps the NPC on the screen.
+            :return: None
+            """
+            pass
 
     def movement(self):
         """
@@ -61,8 +73,30 @@ class Monster(pygame.sprite.Sprite): #Monster is child of sprite class
         :return:
         """
         #Eventual momvement of monster
-        self.rect.move_ip(0, -3)
-        self.rect.move_ip(0, 3)
+        if self.rect.bottom >= self.screen_size[1]:
+            self.path = "north"
+        if self.rect.top <= 0:
+            self.path = "south"
+        if self.rect.left <= 0:
+            self.path = "east"
+        if self.rect.right >= self.screen_size[0]:
+            self.path = "west"
+        elif random.random() > .95:
+            self.path = random.choice(self.directions)
+
+        if self.path == "north":
+            self.rect.move_ip(0, -self.move_distance)
+            self.position[1] -= self.move_distance
+        elif self.path == "south":
+            self.rect.move_ip(0, self.move_distance)
+            self.position[1] += self.move_distance
+        if self.path == "east":
+            self.rect.move_ip(self.move_distance, 0)
+            self.position[0] -= self.move_distance
+        if self.path == "west":
+            self.rect.move_ip(-self.move_distance, 0)
+            self.position[0] += self.move_distance
+
 
 
 

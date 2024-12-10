@@ -30,7 +30,7 @@ class Game(pygame.sprite.Sprite):
         """
         pygame.init()
         pygame.sprite.Sprite.__init__(self)  # Calls the sprite methods from pygame sprite
-        self.size = (200,200) #Window size
+        self.size = (500,500) #Window size
         self.screen = pygame.display.set_mode(self.size)
         self.player = Player(self.size)
         self.monster = Monster(self.size)
@@ -44,11 +44,25 @@ class Game(pygame.sprite.Sprite):
         # Create sprite groups
         self.all_sprites = pygame.sprite.Group()  # Group for all sprites
         self.monster_group = pygame.sprite.Group()  # Separate group for monsters
+        self.attack_group = pygame.sprite.Group()  # Separate group for attacks
+        self.chest_group = pygame.sprite.Group()  # Separate group for attacks
+        self.player_group = pygame.sprite.Group()  # Separate group for attacks
 
         # Add sprites to groups
         self.all_sprites.add(self.monster)
         self.monster_group.add(self.monster)
 
+        # Add sprites to groups
+        self.all_sprites.add(self.attack)
+        self.attack_group.add(self.attack)
+
+        # Add sprites to groups
+        self.all_sprites.add(self.chest)
+        self.chest_group.add(self.chest)
+
+        # Add sprites to groups
+        self.all_sprites.add(self.player)
+        self.player_group.add(self.player)
 
     def game_loop(self, damage):
         """
@@ -66,10 +80,12 @@ class Game(pygame.sprite.Sprite):
             keys = pygame.key.get_pressed()  # Get currently pressed keys
             self.player.movement(keys)  # Update player position based on keys
             self.all_sprites.draw(self.screen)
-            self.screen.blit(self.player.surf, self.player.rect)  #spawn player
+            # self.screen.blit(self.player.surf, self.player.rect)  #spawn player
+            self.monster.movement() #Monster moves
+
             # self.screen.blit(self.monster.surf, self.monster.rect) #spawns monster
-            self.screen.blit(self.attack.surf, self.attack.rect)
-            self.screen.blit(self.chest.surf, self.chest.rect)  # spawns chest
+            # self.screen.blit(self.attack.surf, self.attack.rect)
+            # self.screen.blit(self.chest.surf, self.chest.rect)  # spawns chest
 
             # Display Text
             font = pygame.font.SysFont("ComicSans", 10)
@@ -101,13 +117,11 @@ class Game(pygame.sprite.Sprite):
                            self.enemy_invincible = False
 
             #Collision Interaction - Enemy attacks player
-            # if pygame.sprite.collide_rect(self.player,self.attack):
-            #     if self.player_invincible == False:
-            #         Player.take_damage(self.player,damage)
-            #
-            #         self.player_invincible = True
-            #         pygame.time.delay(1000)
-            #         self.player_invincible = False
+            if pygame.sprite.spritecollide(self.player, self.attack_group, dokill=True) and not self.player_invincible:
+                Player.take_damage(self.player, damage)
+                self.player_invincible = True
+                pygame.time.delay(1000)
+                self.player_invincible = False
 
             #Collision Interaction - Chest and Player
             if pygame.sprite.collide_rect(self.player,self.chest):

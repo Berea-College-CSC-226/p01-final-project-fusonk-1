@@ -31,11 +31,12 @@ class Player(pygame.sprite.Sprite):
         """
         super().__init__()
         self.screen_size = screen_size
+        pygame.sprite.Sprite.__init__(self)  # Calls the sprite methods from pygame sprite
         print("Spawning player")
-        self.surf = pygame.image.load('image/player.png').convert_alpha()
-        self.surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
+        self.image = pygame.image.load('image/player.png').convert_alpha()
+        # self.surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
         #self.surf = pygame.transform.scale(self.surf, (width, height))  # changes height
-        self.rect = self.surf.get_rect()
+        self.rect = self.image.get_rect()
         self.rect.move_ip(self.screen_size[0]//2, self.screen_size[1]//2)
         self.move_distance = 0
         self.position = [0,0]

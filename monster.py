@@ -22,7 +22,7 @@ from dungeon import *
 
 
 class Monster(pygame.sprite.Sprite): #Monster is child of sprite class
-    def __init__(self,screen_size, width=50, height=50):
+    def __init__(self,screen_size):
         """
         Handles the basic logic needed to create monsters
         """
@@ -31,8 +31,8 @@ class Monster(pygame.sprite.Sprite): #Monster is child of sprite class
         self.screen_size = screen_size
         print("Spawning monster")
         self.image = pygame.image.load('image/enemy.png').convert_alpha()
-        self.surf = pygame.transform.scale(self.image, (width, height))  # changes height and width of monster
-
+        self.surf = pygame.transform.scale(self.image, (50,50))  # changes height and width of monster
+        self.alive = True
 
         # self.surf = pygame.image.load('image/enemy.png').convert_alpha()
         # self.surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
@@ -110,5 +110,6 @@ class Monster(pygame.sprite.Sprite): #Monster is child of sprite class
         self.health -= damage
         if self.health <= 0:
             self.kill() #removes sprite from group, removes sprite form screen
+            self.alive = False
 
 

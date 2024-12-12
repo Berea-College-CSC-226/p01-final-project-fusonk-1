@@ -13,6 +13,7 @@
 # https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.collide_rect - More collision Information
 #https://www.pygame.org/docs/ref/time.html#pygame.time.delay - delay/Timer
 # str(self.player.hp) - converting a int into a string for display - Professor Hegan
+#https://www.pygame.org/docs/ref/time.html - get ticks, clock
 # licensed under a Creative Commons
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
 ####################################################################################
@@ -36,7 +37,7 @@ class Game(pygame.sprite.Sprite):
         self.monster = Monster(self.size)
         self.attack = Attack(self.size)
         self.chest = Item(self.size)
-        self.damage = 1
+        self.damage = 5
         self.enemy_invincible = False
         self.chest_empty = False
         self.player_invincible = False
@@ -64,6 +65,51 @@ class Game(pygame.sprite.Sprite):
         self.all_sprites.add(self.player)
         self.player_group.add(self.player)
 
+        #Tick spawn time
+        self.last_attack_time = pygame.time.get_ticks()
+        self.attack_duration = 5000  # 5 seconds
+        self.attack_cooldown = 5000  # 5 seconds cooldown time for spawning
+        self.attack_move = 1000 # 1 second before attack moves
+
+
+    def spawn_attack(self):
+        current_time = pygame.time.get_ticks()
+        if current_time - self.last_attack_time >= self.attack_cooldown:
+            # self.attack.add(self.new_attack)  # Add it to the group
+            # pygame.attack.Attack.add(new_attack)
+            self.attack.rect.x = self.monster.rect.x #moves attack to where monster just was
+            self.attack.rect.y = self.monster.rect.y
+            self.last_attack_time = current_time
+
+
+    def handle_collisions(self, keys, damage):
+        """
+        Moved all collisions here, as a way to stop the lag
+        :param keys:
+        :param damage:
+        :return:
+        """
+        # Collision - Player damages Monster
+        if pygame.sprite.collide_rect(self.player, self.monster):
+            if keys[pygame.K_f] and not self.enemy_invincible: #Checks if monster is able to be hurt
+                Monster.take_damage(self.monster, damage)
+                self.enemy_invincible = True #Checks if monster is able to be hurt
+                pygame.time.delay(1000)
+                self.enemy_invincible = False
+
+        # Collision - Enemy attacks player
+        if pygame.sprite.spritecollide(self.player, self.attack_group, dokill=True) and not self.player_invincible:
+            Player.take_damage(self.player, damage)
+            self.player_invincible = True
+            pygame.time.delay(1000)
+            self.player_invincible = False
+
+    # Collision - Chest and Player
+        if pygame.sprite.collide_rect(self.player, self.chest):
+            if keys[pygame.K_a] and not self.chest_empty:
+                self.chest.gold = self.chest.gold + randint(20, 100)
+                self.chest_empty = True
+
     def game_loop(self, damage):
         """
         Handles running the game
@@ -77,61 +123,43 @@ class Game(pygame.sprite.Sprite):
 
             self.screen.fill('gray')
             self.player.movement(pygame.key.get_pressed())
-            keys = pygame.key.get_pressed()  # Get currently pressed keys
-            self.player.movement(keys)  # Update player position based on keys
+            keys = pygame.key.get_pressed()  #currently pressed keys
+            self.player.movement(keys)  #Update players position based on keys
             self.all_sprites.draw(self.screen)
-            # self.screen.blit(self.player.surf, self.player.rect)  #spawn player
             self.monster.movement() #Monster moves
+            self.attack.movement() #attack moves when spawned
 
-            # self.screen.blit(self.monster.surf, self.monster.rect) #spawns monster
-            # self.screen.blit(self.attack.surf, self.attack.rect)
-            # self.screen.blit(self.chest.surf, self.chest.rect)  # spawns chest
+            self.spawn_attack()
 
-            # Display Text
+            #Handles collision
+            self.handle_collisions(keys, damage)
+
+            #Update sprites
+            self.all_sprites.update()
+
+            #Draws sprites
+            self.all_sprites.draw(self.screen)
+
+            #Check for game over
+            self.game_over()
+
+            # Display stats (e.g., health, gold) maybe move later?
             font = pygame.font.SysFont("ComicSans", 10)
-            #Health text
+
+            # Health text
             txt = font.render('Health', True, "darkblue")
-            self.screen.blit(txt, (self.size[0] // 16, self.size[1] - 200)) #Division, and minus changes the place where the text spawns
-
-            #str converts the int into a string for display
+            self.screen.blit(txt, (self.size[0] // 16, self.size[1] - 200))
             player_health = font.render(str(self.player.hp), True, "darkblue")
-            self.screen.blit(player_health,(self.size[0] // 4, self.size[1]-200))
+            self.screen.blit(player_health, (self.size[0] // 4, self.size[1] - 200))
 
-            #Gold Text
+            # Gold Text
             text = font.render('Gold', True, "darkblue")
-            self.screen.blit(text, (self.size[0] //3, self.size[1] - 200))
-
-            #converts the int into str for display
+            self.screen.blit(text, (self.size[0] // 3, self.size[1] - 200))
             t = font.render(str(self.chest.gold), True, "darkblue")
-            self.screen.blit(t, (self.size[0]//2, self.size[1] - 200))
+            self.screen.blit(t, (self.size[0] // 2, self.size[1] - 200))
 
-            #Collision Interaction - Player damages Monster
-            ##tests for collision between two sprites, specifically sprites with rect function.
-            if pygame.sprite.collide_rect(self.player, self.monster):  #Only this collision type works as expected, do not remove!
-                   if keys[pygame.K_f]:
-                       if self.enemy_invincible == False: #Checks if monster is able to be hurt
-                           Monster.take_damage(self.monster, damage)
-                           # self.monster.update()
-                           self.enemy_invincible = True #makes it so monster cant be hurt
-                           pygame.time.delay(1000) #Timer delays in milliseconds
-                           self.enemy_invincible = False
+            pygame.display.update()  # Update the display
 
-            #Collision Interaction - Enemy attacks player
-            if pygame.sprite.spritecollide(self.player, self.attack_group, dokill=True) and not self.player_invincible:
-                Player.take_damage(self.player, damage)
-                self.player_invincible = True
-                pygame.time.delay(1000)
-                self.player_invincible = False
-
-            #Collision Interaction - Chest and Player
-            if pygame.sprite.collide_rect(self.player,self.chest):
-                if keys[pygame.K_a]:
-                    if self.chest_empty == False:
-                        self.chest.gold += randint(20,100)
-                        self.chest_empty = True
-
-
-            pygame.display.update() #updates the screen to fix screen turning black
 
 
     def game_over(self):
@@ -139,7 +167,28 @@ class Game(pygame.sprite.Sprite):
         checks if game is over
         :return:
         """
-        pass
+        if self.player.hp <=0:
+            # self.screen.fill('black')
+            self.player.kill()
+            self.monster.kill()
+            self.attack.kill()
+            self.chest.kill()
+            # Display stats (e.g., health, gold) maybe move later?
+            font = pygame.font.SysFont("ComicSans", 10)
+
+            # Health text
+            txt = font.render('Health', True, "white")
+            self.screen.blit(txt, (self.size[0] // 16, self.size[1] - 200))
+            player_health = font.render(str(self.player.hp), True, "white")
+            self.screen.blit(player_health, (self.size[0] // 4, self.size[1] - 200))
+
+            # Gold Text
+            text = font.render('Gold', True, "white")
+            self.screen.blit(text, (self.size[0] // 3, self.size[1] - 200))
+            t = font.render(str(self.chest.gold), True, "white")
+            self.screen.blit(t, (self.size[0] // 2, self.size[1] - 200))
+
+
 
     def display_stats(self):
         """
@@ -158,7 +207,6 @@ def main():
     :return: None
     """
     game = Game()
-    # pygame.display.update()
     game.game_loop(game.damage)  #Passed parameter into loop
 
 

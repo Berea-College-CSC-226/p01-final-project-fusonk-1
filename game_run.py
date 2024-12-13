@@ -33,11 +33,12 @@ class Game(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)  # Calls the sprite methods from pygame sprite
         self.size = (500,500) #Window size
         self.screen = pygame.display.set_mode(self.size)
+        # creates an instance of the classes
         self.player = Player(self.size)
         self.monster = Monster(self.size)
         self.attack = Attack(self.size)
         self.chest = Item(self.size)
-        self.damage = 1
+        self.damage = 1 #damage has to be here, or else it doesnt know damage amount
         self.enemy_invincible = False
         self.chest_empty = False
         self.player_invincible = False
@@ -81,9 +82,9 @@ class Game(pygame.sprite.Sprite):
         self.attack_group.draw(self.screen)
         if current_time - self.last_attack_time >= self.attack_cooldown:
             new_attack = Attack(self.size)
-            self.attack_group.add(new_attack)  # Group
-            self.all_sprites.add(new_attack)
-            self.attack = new_attack # Update to current monster
+            self.attack_group.add(new_attack)  # adds new_attack to its specific group
+            self.all_sprites.add(new_attack) # adds new_attack to all sprites group
+            self.attack = new_attack # update attack to current attack
             self.attack.rect.x = self.monster.rect.x #moves attack to where monster just was
             self.attack.rect.y = self.monster.rect.y
             self.last_attack_time = current_time
@@ -100,7 +101,7 @@ class Game(pygame.sprite.Sprite):
         # Collision - Player damages Monster
         if pygame.sprite.collide_rect(self.player, self.monster):
             if keys[pygame.K_f] and not self.enemy_invincible: #Checks if monster is able to be hurt
-                self.take_hit(1)
+                self.take_hit(damage) #passing in damage
                 self.enemy_invincible = True #Checks if monster is able to be hurt
                 pygame.time.delay(1000)
                 self.enemy_invincible = False
@@ -115,7 +116,7 @@ class Game(pygame.sprite.Sprite):
     # Collision - Chest and Player
         if pygame.sprite.collide_rect(self.player, self.chest):
             if keys[pygame.K_a] and not self.chest_empty:
-                self.chest.gold = self.chest.gold + randint(20, 100)
+                self.chest.gold = self.chest.gold + randint(80, 500)
                 self.chest_empty = True
 
     def game_loop(self, damage):
@@ -186,8 +187,8 @@ class Game(pygame.sprite.Sprite):
         spawns a new monster
         :return:
         """
-        new_monster = Monster(self.size)
-        self.monster_group.add(new_monster) #Group
+        new_monster = Monster(self.size) #creates new instance of monster class
+        self.monster_group.add(new_monster) #Grouping
         self.all_sprites.add(new_monster)
         self.monster = new_monster  #Update to current monster
 

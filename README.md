@@ -31,6 +31,7 @@ https://www.pygame.org/docs/ref/time.html#pygame.time.delay
 https://www.pygame.org/docs/ref/time.html
 https://www.pygame.org/docs/ref/tests.html
 https://www.pygame.org/docs/ref/image.html#pygame.image.load - images for sprites
+https://www.youtube.com/watch?v=6tNS--WetLI - testing
 ---
 
 ## Milestone 1: Setup, Planning, Design

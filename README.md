@@ -29,6 +29,7 @@ https://docs.python.org/3/library/time.html
 hhttps://www.pygame.org/docs/ref/time.html#pygame.time.get_ticks
 https://www.pygame.org/docs/ref/time.html#pygame.time.delay
 https://www.pygame.org/docs/ref/time.html
+https://www.pygame.org/docs/ref/tests.html
 https://www.pygame.org/docs/ref/image.html#pygame.image.load - images for sprites
 ---
 

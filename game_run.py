@@ -202,7 +202,7 @@ class Game(pygame.sprite.Sprite):
         self.monster.health -= damage
         if self.monster.health <= 0:
            self.monster.kill()  # removes sprite from group, removes sprite form screen
-           self.chest.gold = randint(10,20)
+           self.chest.gold += randint(10,20)
            self.chest_empty = False
            self.spawn_monster()
 

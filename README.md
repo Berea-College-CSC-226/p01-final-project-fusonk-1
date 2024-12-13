@@ -22,7 +22,13 @@ https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.Sprite.kill
 https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.collide_rect
 https://www.pygame.org/docs/ref/time.html#pygame.time.delay
 str(self.player.hp) - converting a int into a string for display - Professor Hegan
+The legend of Tuna game we worked on in class
 https://www.youtube.com/watch?v=4TfZjhw0J-8 - sprite groups explained
+https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.Sprite.groups
+https://docs.python.org/3/library/time.html
+hhttps://www.pygame.org/docs/ref/time.html#pygame.time.get_ticks
+https://www.pygame.org/docs/ref/time.html#pygame.time.delay
+https://www.pygame.org/docs/ref/time.html
 https://www.pygame.org/docs/ref/image.html#pygame.image.load - images for sprites
 ---
 
@@ -79,9 +85,9 @@ What has surprised you so far? Describe your general feelings. Be honest with yo
 
 Indicate what percentage of the project you have left to complete and how confident you feel. 
 
-❗️**Completion Percentage**: `45%`
+**Completion Percentage**: `45%`
 
-❗️**Confidence**: Describe how confident you feel about completing this project, and why. Then, describe some 
+**Confidence**: Describe how confident you feel about completing this project, and why. Then, describe some 
   strategies you can employ to increase the likelihood that you'll be successful in completing this project 
   before the deadline.
 
@@ -97,26 +103,35 @@ Indicate what percentage of the project you have left to complete and how confid
 
 ## Milestone 4: Final Code, Presentation, Demo
 
-### ❗User Instructions
-In a paragraph, explain how to use your program. Assume the user is starting just after they hit the "Run" button 
-in PyCharm. 
+### User Instructions
+You can move the character using the arrows, you can click on the chest by getting close to it and pressing a.
+This will add the gold to your total in the bottom part of the screen. You want to avoid the ball that is spawned every
+5 seconds by the monster, if it hits you you will take one damage. You have 5 hearts so you can take 5 hits. You can also
+see this next to the gold in the bottom of the screen. You can hit the monster by going close to hit and hitting f two times, this
+will kill the monster and give you additional gold, it will also reload the chest, and make it full of gold
+again. The monster will respawn, and the game ends when you run out of hearts.
 
-### ❗Reflection
-In three to four well-written paragraphs, address the following (at a minimum):
-- Why did you select the project that you did?
-- How closely did your final project reflect your initial design?
-- What did you learn from this process?
-- What was the hardest part of the final project?
-- What would you do differently next time, knowing what you know now?
-- (For partners) How well did you work with your partner? What made it go well? What made it challenging?
+### Reflection
 
 I selected my project, because I enjoy games and I wasn't great at coding so I wanted to take on
 a bigger project in order to try and increase my skills, while learning how to create games, because
 I enjoy making games. I knew this would be hard to create, and it has been. My final project is a bit different from
 what I was originally planning to create, I've had to change where some items run because they were game mechanics
-not sprite mechanics, I've had to ____________. Continue later, Im gonna take a small break.
+not sprite mechanics. I've had to overhaul how the sprites work by turning them into groups. The game
+overall has become more of an arcade type game where your going for the most gold until your character dies.
 
-. I certainly haven't been
-able to do everything I wanted to, but I don't regret trying to make a small dungeon crawler, because I feel like I've learned so much.
-I've learned how to handle sprite collisions better, how to group sprites, how to create sprites, how to add
-text to the screen when its updating,ect.
+I think the hardest part about the final project was figuring out how to kill sprites.
+Originally they weren't grouped, so even though I knew about the kill method I had no idea how to implement it, until
+after I had watched a video on it to try and figure out my issue. Im also having trouble killing the attack sprites
+that I've had to respawn, so currently they are a game feature to make the game end quicker.
+
+I certainly haven't been able to do everything I wanted to, but I don't regret trying to
+make a small dungeon crawler, because I feel like I've learned so much.
+I've learned how to handle sprite collisions better, how to group sprites, how to call on classes 
+from different code pages, learn what should be game code vs what should be sprite code,
+how to create sprites, how to add text to the screen when its updating, and Im even starting to learn how tick speed works,ect.
+
+Next time, I think I would work on getting tick speed down, so that I could use it for collisions instead
+of the delay that is causing the whole screen to freeze. I would also like to learn how to kill old sprite
+after getting a new one, because the old one just sits on the screen and does nothing except be a small issue for
+the player.

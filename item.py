@@ -29,15 +29,12 @@ class Item(pygame.sprite.Sprite):
 
         self.image = pygame.image.load('image/chest.png').convert_alpha()
         self.surf = pygame.transform.scale(self.image, (width, height))  # changes height and width of chest
-
-        # self.surf = pygame.image.load('image/chest.png').convert_alpha()
-        # self.surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
         self.rect = self.surf.get_rect()
         self.rect.move_ip(self.screen_size[0] // 2, self.screen_size[1] // 2)
         self.size = 5
         self.surf = pygame.transform.scale(self.surf, (width, height))
-        self.rect.x = screen_size[0] - width  # Right of screen, changes spawn point
-        self.rect.y = 40  # Top of screen, changes spawn point
+        # self.rect.x = screen_size[0] - width  # Right of screen, changes spawn point
+        self.rect.x = 400
+        self.rect.y = 400
         self.gold = 0
-        # changes height and width
 

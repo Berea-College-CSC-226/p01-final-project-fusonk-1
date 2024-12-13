@@ -19,6 +19,7 @@ import pygame
 import random
 from player import *
 from dungeon import *
+from game_run import *
 
 
 class Monster(pygame.sprite.Sprite): #Monster is child of sprite class
@@ -29,43 +30,20 @@ class Monster(pygame.sprite.Sprite): #Monster is child of sprite class
         super().__init__()
         pygame.sprite.Sprite.__init__(self)  # Calls the sprite methods from pygame sprite
         self.screen_size = screen_size
-        print("Spawning monster")
         self.image = pygame.image.load('image/enemy.png').convert_alpha()
         self.surf = pygame.transform.scale(self.image, (50,50))  # changes height and width of monster
         self.alive = True
-
-        # self.surf = pygame.image.load('image/enemy.png').convert_alpha()
-        # self.surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
         self.rect = self.image.get_rect()
-
         self.rect.move_ip(self.screen_size[0] // 2, self.screen_size[1] // 2)
-
-        # self.surf = pygame.transform.scale(self.image, (width, height)) #changes height and width of monster
 
         self.rect.x = 10 #screen_size[0] - width  # Right of screen, changes spawn point
         self.rect.y = 4  # Top of screen, changes spawn point
         self.health = 2
-        #Code from tuna teamwork
+
         self.move_distance = 2
         self.directions = ["north", "south", "east", "west"]
         self.path = random.choice(self.directions)
         self.position = [0, 0]
-
-
-
-
-    def direction(self):
-        """
-        Choose a direction for movement purposes TO DO: Create a back and forth motion for monsters, use legend of Tuna as base
-        :return:
-        """
-
-        def get_directions(self):
-            """
-            Keeps the NPC on the screen.
-            :return: None
-            """
-            pass
 
     def movement(self):
         """
@@ -97,19 +75,5 @@ class Monster(pygame.sprite.Sprite): #Monster is child of sprite class
             self.rect.move_ip(-self.move_distance, 0)
             self.position[0] += self.move_distance
 
-
-
-
-    def take_damage(self, damage):
-        """
-        calculates the damage the monster takes after its been hit
-        :param:
-        :return:
-        """
-        #Trying to make monster take damage
-        self.health -= damage
-        if self.health <= 0:
-            self.kill() #removes sprite from group, removes sprite form screen
-            self.alive = False
 
 

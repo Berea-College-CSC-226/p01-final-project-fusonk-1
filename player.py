@@ -34,8 +34,6 @@ class Player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)  # Calls the sprite methods from pygame sprite
         print("Spawning player")
         self.image = pygame.image.load('image/player.png').convert_alpha()
-        # self.surf.set_colorkey((255, 255, 255), pygame.RLEACCEL)
-        #self.surf = pygame.transform.scale(self.surf, (width, height))  # changes height
         self.rect = self.image.get_rect()
         self.rect.move_ip(self.screen_size[0]//2, self.screen_size[1]//2)
         self.move_distance = 0
@@ -48,7 +46,7 @@ class Player(pygame.sprite.Sprite):
         Keep player from leaving boundaries
         :return:
         """
-        #Attempting to create better boundaries
+        #Attempting to create better boundaries, boundaries from tuna game
         if self.rect.bottom >self.screen_size[1]:
             self.rect.bottom = self.screen_size[1]
             self.direction = "north"
@@ -72,7 +70,6 @@ class Player(pygame.sprite.Sprite):
 
         :return: None
         """
-        #Attempting better movement
         if keys[pygame.K_UP]:
             self.rect.move_ip(0, -1)
         elif keys[pygame.K_DOWN]:
@@ -94,14 +91,5 @@ class Player(pygame.sprite.Sprite):
         self.hp -= damage
         if self.hp <= 0:
             self.kill()
-
-    def kill(self):
-        print("Despawn player")
-        # pygame.sprite.Sprite.kill(self)
-
-    # def die(self):
-    #     self.rect.y = 50
-    #     self.alive = False
-    #     print("A player has died") #just for testing purposes
 
 

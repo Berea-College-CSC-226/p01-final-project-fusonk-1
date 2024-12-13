@@ -37,7 +37,7 @@ class Game(pygame.sprite.Sprite):
         self.monster = Monster(self.size)
         self.attack = Attack(self.size)
         self.chest = Item(self.size)
-        self.damage = 5
+        self.damage = 1
         self.enemy_invincible = False
         self.chest_empty = False
         self.player_invincible = False
@@ -66,20 +66,28 @@ class Game(pygame.sprite.Sprite):
         self.player_group.add(self.player)
 
         #Tick spawn time
-        self.last_attack_time = pygame.time.get_ticks()
-        self.attack_duration = 5000  # 5 seconds
+        self.last_attack_time = pygame.time.get_ticks() #last time an attack was spawned (Start of game)
         self.attack_cooldown = 5000  # 5 seconds cooldown time for spawning
-        self.attack_move = 1000 # 1 second before attack moves
+
 
 
     def spawn_attack(self):
+        """
+        spawns an attack, by using ticks to see if 5 seconds have passed.
+        Adds sprite to new group
+        :return:
+        """
         current_time = pygame.time.get_ticks()
+        self.attack_group.draw(self.screen)
         if current_time - self.last_attack_time >= self.attack_cooldown:
-            # self.attack.add(self.new_attack)  # Add it to the group
-            # pygame.attack.Attack.add(new_attack)
+            new_attack = Attack(self.size)
+            self.attack_group.add(new_attack)  # Group
+            self.all_sprites.add(new_attack)
+            self.attack = new_attack # Update to current monster
             self.attack.rect.x = self.monster.rect.x #moves attack to where monster just was
             self.attack.rect.y = self.monster.rect.y
             self.last_attack_time = current_time
+
 
 
     def handle_collisions(self, keys, damage):
@@ -92,7 +100,7 @@ class Game(pygame.sprite.Sprite):
         # Collision - Player damages Monster
         if pygame.sprite.collide_rect(self.player, self.monster):
             if keys[pygame.K_f] and not self.enemy_invincible: #Checks if monster is able to be hurt
-                Monster.take_damage(self.monster, damage)
+                self.take_hit(1)
                 self.enemy_invincible = True #Checks if monster is able to be hurt
                 pygame.time.delay(1000)
                 self.enemy_invincible = False
@@ -125,80 +133,92 @@ class Game(pygame.sprite.Sprite):
             self.player.movement(pygame.key.get_pressed())
             keys = pygame.key.get_pressed()  #currently pressed keys
             self.player.movement(keys)  #Update players position based on keys
-            self.all_sprites.draw(self.screen)
-            self.monster.movement() #Monster moves
+
+            self.monster_group.draw(self.screen) #draws monster sprite
+            self.player_group.draw(self.screen) #draws player sprite
+            self.chest_group.draw(self.screen)#draws chest sprite
+            self.monster.movement() #monster moves
             self.attack.movement() #attack moves when spawned
 
             self.spawn_attack()
 
-            #Handles collision
+            #collision
             self.handle_collisions(keys, damage)
 
-            #Update sprites
+            #update sprites
             self.all_sprites.update()
 
-            #Draws sprites
-            self.all_sprites.draw(self.screen)
-
-            #Check for game over
+            #check for game over
             self.game_over()
 
-            # Display stats (e.g., health, gold) maybe move later?
-            font = pygame.font.SysFont("ComicSans", 10)
+            # Display stats (health, gold)
+            font = pygame.font.SysFont("ComicSans", 20)
 
             # Health text
             txt = font.render('Health', True, "darkblue")
-            self.screen.blit(txt, (self.size[0] // 16, self.size[1] - 200))
+            self.screen.blit(txt, (self.size[0] // 16, self.size[1] - 50))
             player_health = font.render(str(self.player.hp), True, "darkblue")
-            self.screen.blit(player_health, (self.size[0] // 4, self.size[1] - 200))
+            self.screen.blit(player_health, (self.size[0] // 4, self.size[1] - 50))
 
             # Gold Text
             text = font.render('Gold', True, "darkblue")
-            self.screen.blit(text, (self.size[0] // 3, self.size[1] - 200))
+            self.screen.blit(text, (self.size[0] // 3, self.size[1] - 50))
             t = font.render(str(self.chest.gold), True, "darkblue")
-            self.screen.blit(t, (self.size[0] // 2, self.size[1] - 200))
+            self.screen.blit(t, (self.size[0] // 2, self.size[1] - 50))
 
             pygame.display.update()  # Update the display
 
-
+        pygame.quit()
 
     def game_over(self):
         """
-        checks if game is over
+        checks if game is over, if yes kill everything
         :return:
         """
         if self.player.hp <=0:
-            # self.screen.fill('black')
             self.player.kill()
             self.monster.kill()
             self.attack.kill()
             self.chest.kill()
-            # Display stats (e.g., health, gold) maybe move later?
-            font = pygame.font.SysFont("ComicSans", 10)
 
-            # Health text
-            txt = font.render('Health', True, "white")
-            self.screen.blit(txt, (self.size[0] // 16, self.size[1] - 200))
-            player_health = font.render(str(self.player.hp), True, "white")
-            self.screen.blit(player_health, (self.size[0] // 4, self.size[1] - 200))
-
-            # Gold Text
-            text = font.render('Gold', True, "white")
-            self.screen.blit(text, (self.size[0] // 3, self.size[1] - 200))
-            t = font.render(str(self.chest.gold), True, "white")
-            self.screen.blit(t, (self.size[0] // 2, self.size[1] - 200))
-
-
-
-    def display_stats(self):
+    def spawn_monster(self):
         """
-        displays information on screen such as gold, health, and item
+        spawns a new monster
         :return:
         """
+        new_monster = Monster(self.size)
+        self.monster_group.add(new_monster) #Group
+        self.all_sprites.add(new_monster)
+        self.monster = new_monster  #Update to current monster
+
+    def take_hit(self, damage): #moved over from monster class cause it couldn't be called over there to respawn monster
+        """
+        calculates the damage the monster takes after its been hit
+        :param:
+        :return:
+        """
+        # Trying to make monster take damage
+        self.monster.health -= damage
+        if self.monster.health <= 0:
+           self.monster.kill()  # removes sprite from group, removes sprite form screen
+           self.chest.gold = randint(10,20)
+           self.chest_empty = False
+           self.spawn_monster()
 
 
+    def take_damageA(self, damage):
+        """
+        calculates the damage the attack takes after its been hit
+        :param:
+        :return:
+        """
+        #Trying to make attack take damage
+        self.attack.health -= damage
+        if self.attack.health <= 0:
+            self.attack.kill()
+            self.spawn_attack()
 
-        pygame.quit()
+
 
 def main():
     """

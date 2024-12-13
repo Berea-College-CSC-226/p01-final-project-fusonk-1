@@ -18,7 +18,7 @@
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
 ####################################################################################
 from random import randint
-
+from item import *
 from player import *
 from monster import *
 from attack import *

@@ -15,11 +15,9 @@
 # licensed under a Creative Commons
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
 ####################################################################################
-import pygame
+
 from monster import *
-import time
-# from dungeon import *
-# from item import *
+
 
 
 class Player(pygame.sprite.Sprite):

@@ -14,7 +14,7 @@
 # licensed under a Creative Commons
 # Attribution-Noncommercial-Share Alike 3.0 United States License.
 ####################################################################################
-import pygame
+
 from player import *
 
 class Item(pygame.sprite.Sprite):

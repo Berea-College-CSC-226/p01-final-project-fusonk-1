@@ -1,9 +1,6 @@
-# ❗CSC226 Final Project
+# CSC226 Final Project
 
 ## Instructions
-
-❗️Exclamation Marks ❗️indicate action items; you should remove these emoji as you complete/update the items which 
-  they accompany. (This means that your final README should have no ❗️in it!)
 
 ️**Author(s)**: Kirsten Fuson
 

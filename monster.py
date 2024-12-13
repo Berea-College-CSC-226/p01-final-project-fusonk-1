@@ -18,7 +18,6 @@
 import pygame
 import random
 from player import *
-from dungeon import *
 from game_run import *
 
 
